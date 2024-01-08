@@ -1,31 +1,29 @@
 package ru.sadykoff.avitoplus.entity;
 
 
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import io.swagger.annotations.ApiModel;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
-@Document(collection = "avito_raw_data_ads")
-//@ApiModel(description = "data model of author entity")
+@Document(collection = "advertisments")
 public class Advertisement {
     @Id
     private String url;
-
-
-    private List<String> category;
-
     private String name;
-    private String specifications;
     private String description;
-    private String priceCurrency;
-    private String price;
     private String date;
-    private String place;
+    private Price price;
+    private boolean isFull;
+    private List<String> category;
+    private List<String> place;
+    private List<String> specifications;
+
+    private String commonCluster;
+    private String descriptionCluster;
+
+    private ClusterInfo commonInfo;
+    private ClusterInfo descriptionInfo;
 }

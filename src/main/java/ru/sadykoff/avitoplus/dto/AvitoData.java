@@ -7,6 +7,6 @@ import java.util.List;
 
 @Data
 public class AvitoData {
-    private long count;
+    private Integer count;
     private List<Advertisement> advertisements;
 }
