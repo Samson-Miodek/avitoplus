@@ -1,14 +1,12 @@
 package ru.sadykoff.avitoplus.repository;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Mono;
 import ru.sadykoff.avitoplus.entity.Advertisement;
 
-import java.util.List;
-import java.util.Optional;
 
 @Repository
-public interface AdvertisementRepository extends MongoRepository<Advertisement, String> {
-
-    Optional<Advertisement> findByUrl(String link);
+public interface AdvertisementRepository extends ReactiveMongoRepository<Advertisement, String> {
+    Mono<Advertisement> findByUrl(String link);
 }
