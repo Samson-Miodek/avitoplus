@@ -2,10 +2,13 @@ package ru.sadykoff.avitoplus.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.sadykoff.avitoplus.dto.AvitoData;
 import ru.sadykoff.avitoplus.entity.Advertisement;
 import ru.sadykoff.avitoplus.repository.AdvertisementRepository;
+
+import java.util.List;
 
 
 @Service
@@ -58,5 +61,14 @@ public class AvitoDataService {
 
     public Mono<Advertisement> findByLink(String link) {
         return advertisementRepository.findByUrl(link);
+    }
+
+    public Mono<Mono<List<Advertisement>>> getCluster(String link) {
+        return advertisementRepository
+                .findByUrl(link)
+                .map(advertisement ->
+                        advertisementRepository.findByCommonCluster(advertisement.getCommonCluster())
+                )
+                .map(Flux::collectList);
     }
 }
